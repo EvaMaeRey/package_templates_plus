@@ -1,0 +1,29 @@
+
+
+
+```{r}
+minimal_flipbook <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/minimal-flipbook/skeleton/skeleton.Rmd"
+
+embed_flipbook <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/flipbook-embed/skeleton/skeleton.Rmd"
+
+most_features_flipbook <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/most-features/skeleton/skeleton.Rmd"
+
+python_flipbook <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/python-flipbook/skeleton/skeleton.Rmd"
+
+essay_exploder <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/slow-essay/skeleton/skeleton.Rmd"
+
+ggxmeans_template <- "https://raw.githubusercontent.com/EvaMaeRey/ggxmean/master/inst/rmarkdown/templates/template-name/skeleton/skeleton.Rmd"
+
+list_of_urls <- objects()
+
+for (i in 1:length(list_of_urls)){
+
+  download.file(get(list_of_urls[i]), paste0(list_of_urls[i], ".Rmd"))
+  
+}
+
+
+
+rmarkdown::render("ggxmeans_template.Rmd")
+```
+
