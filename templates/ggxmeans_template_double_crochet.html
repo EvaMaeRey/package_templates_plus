@@ -19,16 +19,102 @@ class: center, middle, inverse, title-slide
 ---
 
 
+---
+class: inverse
+
+###From source .Rmd:
+
+ 
+ ```
+ ---
+ title: "Template Title"
+ author: "Your Name"
+ date: "The Date"
+ output: 
+   xaringan::moon_reader:
+     lib_dir: libs
+     css: [default, hygge, ninjutsu]
+     nature:
+       ratio: 16:9
+       highlightStyle: github
+       highlightLines: true
+       countIncrementalSlides: false
+ ```
+
+
+---
+class: inverse
+
+###From source .Rmd:
+
+ 
+ ````
+ ---
+ 
+ ```{r, include = F}
+ # This is the recommended set up for flipbooks
+ # you might think about setting cache to TRUE as you gain practice --- building flipbooks from scratch can be time consuming
+ knitr::opts_chunk$set(fig.width = 6, message = FALSE, warning = FALSE, comment = "", cache = F)
+ library(flipbookr)
+ library(tidyverse)
+ 
+ ```
+ ````
+---
+
+
+
 
 
 
 
 
 ---
+class: inverse
+
+###From source .Rmd:
+
+ 
+ ```
+ ---
+ 
+ # viz the means and conditional means
+ ```
+---
 
 # viz the means and conditional means
 
 
+
+
+---
+class: inverse
+
+###From source .Rmd:
+
+ 
+ ````
+ ---
+ 
+ 
+ `r chunk_reveal("vizthemean1d")`
+ 
+ ```{r vizthemean1d, include = F}
+ library(ggxmean)
+ palmerpenguins::penguins %&gt;% 
+   drop_na() %&gt;% 
+   ggplot() +
+   aes(x = bill_length_mm) +
+   geom_rug(alpha = .3) +
+   geom_histogram(alpha = .4) +
+   ggxmean:::geom_xmean() +
+   aes(fill = species) + # unexpected behavior here
+   aes(color = species) +
+   facet_wrap(facets = vars(species)) +
+   facet_grid(cols = vars(species),
+              rows = vars(sex))
+ ```
+ ````
 ---
 
 
@@ -60,6 +146,22 @@ library(ggxmean)
  
 .panel2-vizthemean1d-auto[
 
+```
+# A tibble: 344 x 8
+   species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torge…           39.1          18.7              181        3750
+ 2 Adelie  Torge…           39.5          17.4              186        3800
+ 3 Adelie  Torge…           40.3          18                195        3250
+ 4 Adelie  Torge…           NA            NA                 NA          NA
+ 5 Adelie  Torge…           36.7          19.3              193        3450
+ 6 Adelie  Torge…           39.3          20.6              190        3650
+ 7 Adelie  Torge…           38.9          17.8              181        3625
+ 8 Adelie  Torge…           39.2          19.6              195        4675
+ 9 Adelie  Torge…           34.1          18.1              193        3475
+10 Adelie  Torge…           42            20.2              190        4250
+# … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
+```
 ]
 
 ---
@@ -77,6 +179,22 @@ palmerpenguins::penguins %&gt;%
  
 .panel2-vizthemean1d-auto[
 
+```
+# A tibble: 333 x 8
+   species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torge…           39.1          18.7              181        3750
+ 2 Adelie  Torge…           39.5          17.4              186        3800
+ 3 Adelie  Torge…           40.3          18                195        3250
+ 4 Adelie  Torge…           36.7          19.3              193        3450
+ 5 Adelie  Torge…           39.3          20.6              190        3650
+ 6 Adelie  Torge…           38.9          17.8              181        3625
+ 7 Adelie  Torge…           39.2          19.6              195        4675
+ 8 Adelie  Torge…           41.1          17.6              182        3200
+ 9 Adelie  Torge…           38.6          21.2              191        3800
+10 Adelie  Torge…           34.6          21.1              198        4400
+# … with 323 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
+```
 ]
 
 ---
@@ -94,7 +212,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean1d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean1d_auto_04_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean1d_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -113,7 +231,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean1d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean1d_auto_05_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean1d_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -133,7 +251,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean1d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean1d_auto_06_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean1d_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -154,7 +272,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean1d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean1d_auto_07_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean1d_auto_07_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -176,7 +294,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean1d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean1d_auto_08_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean1d_auto_08_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -199,7 +317,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean1d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean1d_auto_09_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean1d_auto_09_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -223,7 +341,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean1d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean1d_auto_10_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean1d_auto_10_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -248,7 +366,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean1d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean1d_auto_11_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean1d_auto_11_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -275,7 +393,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean1d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean1d_auto_12_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean1d_auto_12_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
@@ -312,6 +430,36 @@ palmerpenguins::penguins %&gt;%
 
 
 
+
+
+---
+class: inverse
+
+###From source .Rmd:
+
+ 
+ ````
+ ---
+ 
+ 
+ `r chunk_reveal("vizthemean2d")`
+ 
+ ```{r vizthemean2d, include = F}
+ library(ggxmean)
+ palmerpenguins::penguins %&gt;% 
+   drop_na() %&gt;% 
+   ggplot() +
+   aes(x = bill_length_mm) +
+   aes(y = flipper_length_mm) +
+   geom_point() +
+   ggxmean:::geom_xmean() +
+   aes(color = species) +
+   facet_wrap(facets = vars(species)) +
+   ggxmean:::geom_ymean() +
+   facet_grid(cols = vars(species),
+              rows = vars(sex))
+ ```
+ ````
 ---
 
 
@@ -343,6 +491,22 @@ library(ggxmean)
  
 .panel2-vizthemean2d-auto[
 
+```
+# A tibble: 344 x 8
+   species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torge…           39.1          18.7              181        3750
+ 2 Adelie  Torge…           39.5          17.4              186        3800
+ 3 Adelie  Torge…           40.3          18                195        3250
+ 4 Adelie  Torge…           NA            NA                 NA          NA
+ 5 Adelie  Torge…           36.7          19.3              193        3450
+ 6 Adelie  Torge…           39.3          20.6              190        3650
+ 7 Adelie  Torge…           38.9          17.8              181        3625
+ 8 Adelie  Torge…           39.2          19.6              195        4675
+ 9 Adelie  Torge…           34.1          18.1              193        3475
+10 Adelie  Torge…           42            20.2              190        4250
+# … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
+```
 ]
 
 ---
@@ -360,6 +524,22 @@ palmerpenguins::penguins %&gt;%
  
 .panel2-vizthemean2d-auto[
 
+```
+# A tibble: 333 x 8
+   species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torge…           39.1          18.7              181        3750
+ 2 Adelie  Torge…           39.5          17.4              186        3800
+ 3 Adelie  Torge…           40.3          18                195        3250
+ 4 Adelie  Torge…           36.7          19.3              193        3450
+ 5 Adelie  Torge…           39.3          20.6              190        3650
+ 6 Adelie  Torge…           38.9          17.8              181        3625
+ 7 Adelie  Torge…           39.2          19.6              195        4675
+ 8 Adelie  Torge…           41.1          17.6              182        3200
+ 9 Adelie  Torge…           38.6          21.2              191        3800
+10 Adelie  Torge…           34.6          21.1              198        4400
+# … with 323 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
+```
 ]
 
 ---
@@ -377,7 +557,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean2d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean2d_auto_04_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean2d_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -396,7 +576,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean2d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean2d_auto_05_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean2d_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -416,7 +596,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean2d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean2d_auto_06_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean2d_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -437,7 +617,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean2d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean2d_auto_07_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean2d_auto_07_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -459,7 +639,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean2d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean2d_auto_08_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean2d_auto_08_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -482,7 +662,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean2d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean2d_auto_09_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean2d_auto_09_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -506,7 +686,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean2d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean2d_auto_10_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean2d_auto_10_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -531,7 +711,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean2d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean2d_auto_11_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean2d_auto_11_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -558,7 +738,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthemean2d-auto[
-![](ggxmeans_template_files/figure-html/vizthemean2d_auto_12_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthemean2d_auto_12_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
@@ -595,6 +775,39 @@ palmerpenguins::penguins %&gt;%
 
 
 
+
+
+---
+class: inverse
+
+###From source .Rmd:
+
+ 
+ ````
+ ---
+ 
+ 
+ `r chunk_reveal("vizthecorrelation", title = "## viz the correlation")`
+ 
+ ```{r vizthecorrelation, include=F}
+ library(ggxmean)
+ palmerpenguins::penguins %&gt;% 
+   drop_na() %&gt;% 
+   ggplot() +
+   aes(x = bill_length_mm) +
+   aes(y = flipper_length_mm) +
+   geom_point() +
+   ggxmean:::geom_xmean() +
+   ggxmean:::geom_ymean() +
+   ggxmean:::geom_yhline(alpha = .02) +
+   ggxmean:::geom_xvline(alpha = .02) +
+   ggxmean:::geom_xdiff() +
+   ggxmean:::geom_ydiff() +
+   ggxmean:::geom_diffsmultiplied() +
+   aes(x = ((bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm))) +
+   aes(y = (flipper_length_mm - mean(flipper_length_mm))/sd(flipper_length_mm))
+ ```
+ ````
 ---
 
 
@@ -626,6 +839,22 @@ library(ggxmean)
  
 .panel2-vizthecorrelation-auto[
 
+```
+# A tibble: 344 x 8
+   species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torge…           39.1          18.7              181        3750
+ 2 Adelie  Torge…           39.5          17.4              186        3800
+ 3 Adelie  Torge…           40.3          18                195        3250
+ 4 Adelie  Torge…           NA            NA                 NA          NA
+ 5 Adelie  Torge…           36.7          19.3              193        3450
+ 6 Adelie  Torge…           39.3          20.6              190        3650
+ 7 Adelie  Torge…           38.9          17.8              181        3625
+ 8 Adelie  Torge…           39.2          19.6              195        4675
+ 9 Adelie  Torge…           34.1          18.1              193        3475
+10 Adelie  Torge…           42            20.2              190        4250
+# … with 334 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
+```
 ]
 
 ---
@@ -643,6 +872,22 @@ palmerpenguins::penguins %&gt;%
  
 .panel2-vizthecorrelation-auto[
 
+```
+# A tibble: 333 x 8
+   species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g
+   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt;
+ 1 Adelie  Torge…           39.1          18.7              181        3750
+ 2 Adelie  Torge…           39.5          17.4              186        3800
+ 3 Adelie  Torge…           40.3          18                195        3250
+ 4 Adelie  Torge…           36.7          19.3              193        3450
+ 5 Adelie  Torge…           39.3          20.6              190        3650
+ 6 Adelie  Torge…           38.9          17.8              181        3625
+ 7 Adelie  Torge…           39.2          19.6              195        4675
+ 8 Adelie  Torge…           41.1          17.6              182        3200
+ 9 Adelie  Torge…           38.6          21.2              191        3800
+10 Adelie  Torge…           34.6          21.1              198        4400
+# … with 323 more rows, and 2 more variables: sex &lt;fct&gt;, year &lt;int&gt;
+```
 ]
 
 ---
@@ -660,7 +905,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_04_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -679,7 +924,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_05_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -699,7 +944,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_06_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -720,7 +965,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_07_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_07_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -742,7 +987,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_08_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_08_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -765,7 +1010,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_09_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_09_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -789,7 +1034,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_10_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_10_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -814,7 +1059,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_11_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_11_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -840,7 +1085,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_12_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_12_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -867,7 +1112,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_13_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_13_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -895,7 +1140,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_14_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_14_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -924,7 +1169,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_15_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_15_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -954,7 +1199,7 @@ palmerpenguins::penguins %&gt;%
 ]
  
 .panel2-vizthecorrelation-auto[
-![](ggxmeans_template_files/figure-html/vizthecorrelation_auto_16_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/vizthecorrelation_auto_16_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
@@ -988,6 +1233,35 @@ palmerpenguins::penguins %&gt;%
 
 
 
+
+
+---
+class: inverse
+
+###From source .Rmd:
+
+ 
+ ````
+ ---
+ 
+ `r chunk_reveal("suprising", title = "## something surprising")`
+ 
+ ```{r suprising, include = F}
+ cars %&gt;% 
+   ggplot() +
+   aes(x = speed) +
+   ggxmean:::geom_xmean(color = "firebrick",
+              size = 2,
+              linetype = "dotted") +
+   # only x aes is required for xmean 
+   # by y is set to neg Inf and pos Inf
+   # means y needs activated
+   aes(y = dist) +
+   geom_blank() +
+   geom_point() + 
+   geom_rug()
+ ```
+ ````
 ---
 
 count: false
@@ -1002,6 +1276,59 @@ count: false
  
 .panel2-suprising-auto[
 
+```
+   speed dist
+1      4    2
+2      4   10
+3      7    4
+4      7   22
+5      8   16
+6      9   10
+7     10   18
+8     10   26
+9     10   34
+10    11   17
+11    11   28
+12    12   14
+13    12   20
+14    12   24
+15    12   28
+16    13   26
+17    13   34
+18    13   34
+19    13   46
+20    14   26
+21    14   36
+22    14   60
+23    14   80
+24    15   20
+25    15   26
+26    15   54
+27    16   32
+28    16   40
+29    17   32
+30    17   40
+31    17   50
+32    18   42
+33    18   56
+34    18   76
+35    18   84
+36    19   36
+37    19   46
+38    19   68
+39    20   32
+40    20   48
+41    20   52
+42    20   56
+43    20   64
+44    22   66
+45    23   54
+46    24   70
+47    24   92
+48    24   93
+49    24  120
+50    25   85
+```
 ]
 
 ---
@@ -1017,7 +1344,7 @@ cars %&gt;%
 ]
  
 .panel2-suprising-auto[
-![](ggxmeans_template_files/figure-html/suprising_auto_02_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/suprising_auto_02_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1034,7 +1361,7 @@ cars %&gt;%
 ]
  
 .panel2-suprising-auto[
-![](ggxmeans_template_files/figure-html/suprising_auto_03_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/suprising_auto_03_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1054,7 +1381,7 @@ cars %&gt;%
 ]
  
 .panel2-suprising-auto[
-![](ggxmeans_template_files/figure-html/suprising_auto_04_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/suprising_auto_04_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1078,7 +1405,7 @@ cars %&gt;%
 ]
  
 .panel2-suprising-auto[
-![](ggxmeans_template_files/figure-html/suprising_auto_05_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/suprising_auto_05_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1103,7 +1430,7 @@ cars %&gt;%
 ]
  
 .panel2-suprising-auto[
-![](ggxmeans_template_files/figure-html/suprising_auto_06_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/suprising_auto_06_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1129,7 +1456,7 @@ cars %&gt;%
 ]
  
 .panel2-suprising-auto[
-![](ggxmeans_template_files/figure-html/suprising_auto_07_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/suprising_auto_07_output-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -1156,7 +1483,7 @@ cars %&gt;%
 ]
  
 .panel2-suprising-auto[
-![](ggxmeans_template_files/figure-html/suprising_auto_08_output-1.png)&lt;!-- --&gt;
+![](ggxmeans_template_double_crochet_files/figure-html/suprising_auto_08_output-1.png)&lt;!-- --&gt;
 ]
 
 &lt;style&gt;
