@@ -12,23 +12,22 @@ These templates reside online in package github repositories.  All are xaringan 
 
 minimal_flipbook <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/minimal-flipbook/skeleton/skeleton.Rmd"
 
-embed_flipbook <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/flipbook-embed/skeleton/skeleton.Rmd"
-
 most_features_flipbook <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/most-features/skeleton/skeleton.Rmd"
 
 python_flipbook <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/python-flipbook/skeleton/skeleton.Rmd"
 
-essay_exploder <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/slow-essay/skeleton/skeleton.Rmd"
+# need some fixing up!
+# essay_exploder <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/slow-essay/skeleton/skeleton.Rmd"
 
 # template from ggxmeans:
 
-ggxmeans_template <- "https://raw.githubusercontent.com/EvaMaeRey/ggxmean/master/inst/rmarkdown/templates/template-name/skeleton/skeleton.Rmd"
+ggxmean_template <- "https://raw.githubusercontent.com/EvaMaeRey/ggxmean/master/inst/rmarkdown/templates/template-name/skeleton/skeleton.Rmd"
 ```
 
 We download each.
 
 ```{r}
-# Download them all!
+# Download them all and create double crochet version
 unlink("templates", recursive = T)
 dir.create("templates")
 
@@ -44,6 +43,15 @@ for (i in 1:length(list_of_urls)){
 
   }
 
+# embedding is different in king html_document
+# and we won't use double crochet on it so separate
+embed_flipbook <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/flipbook-embed/skeleton/skeleton.Rmd"
+
+download.file(embed_flipbook, "templates/embed_flipbook.Rmd")
+
+
+
+
 ```
 
 Not a great idea to use `rmarkdown::render()` from within Rmarkdown.  From the book:
@@ -53,6 +61,7 @@ Not a great idea to use `rmarkdown::render()` from within Rmarkdown.  From the b
 Feeling a bit lazy to learn new method. Instead, the approach below:
 
 ```{r, eval = F}
+library(magrittr)
 list.files("templates") %>% 
   paste0("templates/",.) %>% 
   paste0("rmarkdown::render('",., "')") %>% 

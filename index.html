@@ -373,19 +373,18 @@ summary {
 
 minimal_flipbook &lt;- &quot;https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/minimal-flipbook/skeleton/skeleton.Rmd&quot;
 
-embed_flipbook &lt;- &quot;https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/flipbook-embed/skeleton/skeleton.Rmd&quot;
-
 most_features_flipbook &lt;- &quot;https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/most-features/skeleton/skeleton.Rmd&quot;
 
 python_flipbook &lt;- &quot;https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/python-flipbook/skeleton/skeleton.Rmd&quot;
 
-essay_exploder &lt;- &quot;https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/slow-essay/skeleton/skeleton.Rmd&quot;
+# need some fixing up!
+# essay_exploder &lt;- &quot;https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/slow-essay/skeleton/skeleton.Rmd&quot;
 
 # template from ggxmeans:
 
-ggxmeans_template &lt;- &quot;https://raw.githubusercontent.com/EvaMaeRey/ggxmean/master/inst/rmarkdown/templates/template-name/skeleton/skeleton.Rmd&quot;</code></pre>
+ggxmean_template &lt;- &quot;https://raw.githubusercontent.com/EvaMaeRey/ggxmean/master/inst/rmarkdown/templates/template-name/skeleton/skeleton.Rmd&quot;</code></pre>
 <p>We download each.</p>
-<pre class="r"><code># Download them all!
+<pre class="r"><code># Download them all and create double crochet version
 unlink(&quot;templates&quot;, recursive = T)
 dir.create(&quot;templates&quot;)
 
@@ -399,22 +398,26 @@ for (i in 1:length(list_of_urls)){
   download.file(get(list_of_urls[i]), list_of_paths[i])
   doublecrochet::crochet(list_of_paths[i])
 
-  }</code></pre>
+  }
+
+# embedding is different in king html_document
+# and we won&#39;t use double crochet on it so separate
+embed_flipbook &lt;- &quot;https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/flipbook-embed/skeleton/skeleton.Rmd&quot;
+
+download.file(embed_flipbook, &quot;templates/embed_flipbook.Rmd&quot;)</code></pre>
 <p>Not a great idea to use <code>rmarkdown::render()</code> from within Rmarkdown. From the book:</p>
 <blockquote>
 <p>In case you need to render an Rmd document inside another Rmd document, we strongly recommend that you use this method instead of directly calling rmarkdown::render() in a code chunk, because rmarkdown::render() creates and relies on a lot of side effects internally, which may affect rendering other Rmd documents in the same R session.</p>
 </blockquote>
 <p>Feeling a bit lazy to learn new method. Instead, the approach below:</p>
-<pre class="r"><code>&#39; 
-rmarkdown::render(&quot;minimal_flipbook.Rmd&quot;)
-
-
-
-
-&#39; %&gt;% 
+<pre class="r"><code>library(magrittr)
+list.files(&quot;templates&quot;) %&gt;% 
+  paste0(&quot;templates/&quot;,.) %&gt;% 
+  paste0(&quot;rmarkdown::render(&#39;&quot;,., &quot;&#39;)&quot;) %&gt;% 
+  paste0(collapse = &quot;\n&quot;) %&gt;% 
   writeLines(&quot;to_do.R&quot;)
 
-# Then do in console:
+# Then execute in console:
 # source(&quot;to_do.R&quot;)</code></pre>
 
 
