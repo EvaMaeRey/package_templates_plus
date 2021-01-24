@@ -32,7 +32,7 @@ class: inverse
 
  ```{r, comment = '', echo = F, return = 'asis'}
 cat('---
-\n\nclass: inverse\nbackground-image: url(https://images.unsplash.com/photo-1572291720677-d8d28ac52a5b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1556&q=80)\nbackground-size: cover\n\n# [{ggxmean}](https://github.com/EvaMaeRey/ggxmean)\n<br><br><br><br><br>\n<br><br><br><br><br>\n<br><br><br><br><br>\n<br><br><br><br><br>\n#### Photo credit: Hans Veth\n\n\n```{r, include = F}\n# This is the recommended set up for flipbooks\n# you might think about setting cache to TRUE as you gain practice --- building flipbooks from scratch can be time consuming\nknitr::opts_chunk$set(fig.width = 8, message = FALSE, warning = FALSE, comment = "", cache = T)\nlibrary(flipbookr)\nlibrary(tidyverse)\n\n```\n\n\n')
+\n\nclass: inverse\nbackground-image: url(https://images.unsplash.com/photo-1572291720677-d8d28ac52a5b?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1556&q=80)\nbackground-size: cover\n\n# [{ggxmean}](https://github.com/EvaMaeRey/ggxmean)\n<br><br><br><br><br>\n<br><br><br><br><br>\n<br><br><br><br><br>\n<br><br><br><br><br>\n#### Photo credit: Hans Veth\n\n\n```{r, include = F}\n# This is the recommended set up for flipbooks\n# you might think about setting cache to TRUE as you gain practice --- building flipbooks from scratch can be time consuming\nknitr::opts_chunk$set(fig.width = 8, message = FALSE, warning = FALSE, comment = "", cache = T)\nlibrary(flipbookr)\nlibrary(tidyverse)\n```\n\n\n')
 ```
 ---
 
@@ -55,7 +55,6 @@ background-size: cover
 knitr::opts_chunk$set(fig.width = 8, message = FALSE, warning = FALSE, comment = "", cache = T)
 library(flipbookr)
 library(tidyverse)
-
 ```
 
 
@@ -69,11 +68,12 @@ class: inverse
 
  ```{r, comment = '', echo = F, return = 'asis'}
 cat('---
-\n# viz the means and conditional means\n\n')
+class: inverse, center, middle\n\n# viz the mean and conditional means\n\n')
 ```
 ---
+class: inverse, center, middle
 
-# viz the means and conditional means
+# viz the mean and conditional means
 
 
 
@@ -85,7 +85,7 @@ class: inverse
 
  ```{r, comment = '', echo = F, return = 'asis'}
 cat('---
-\n\n`r chunk_reveal("vizthemean1d", break_type = "user")`\n\n```{r vizthemean1d, include = F}\nlibrary(ggxmean)\npalmerpenguins::penguins %>% \n  drop_na() %>% \n  ggplot() +\n  aes(x = bill_length_mm) +\n  geom_rug(alpha = .3) +\n  geom_histogram(alpha = .4) + #BREAK\n  ggxmean:::geom_xmean() + #BREAK\n  # unexpected behavior here\n  aes(fill = species) + #BREAK\n  aes(color = species) + #BREAK\n  facet_grid(rows = vars(species)) + #BREAK\n  facet_grid(rows = vars(species, sex)) + #BREAK\n  geom_xq2575(linetype = "dotted") + #BREAK\n  geom_xmin(linetype = "solid") + #BREAK\n  geom_xmax(linetype = "solid",\n            color = "goldenrod") #BREAK\n```\n\n\n\n')
+\n\n`r chunk_reveal("vizthemean1d", break_type = "user")`\n\n```{r vizthemean1d, include = F}\nlibrary(ggxmean)\npalmerpenguins::penguins %>% \n  drop_na() %>% \n  ggplot() +\n  aes(x = bill_length_mm) +\n  geom_rug(alpha = .3) +\n  geom_histogram(alpha = .4) + #BREAK\n  geom_xmean() + #BREAK\n  aes(color = species) + #BREAK\n  aes(fill = species) + #BREAK\n  facet_grid(rows = vars(species)) + #BREAK\n  facet_grid(rows = vars(species, sex)) + #BREAK\n  geom_rug(alpha = .6) + #BREAK\n  geom_xmin(linetype = "dashed") + #BREAK\n  geom_xmax(color = "goldenrod") + #BREAK\n  geom_xmedian(color = "black") + #BREAK\n  ggxmean:::geom_xq2575(\n    linetype = "dotted",\n    color = "black",\n    size = .75) + #BREAK\n  geom_boxplot(y = 0,\n               width = 3,\n               fill = "white",\n               color = "black") #BREAK\n```\n\n\n\n')
 ```
 ---
 
@@ -100,16 +100,23 @@ palmerpenguins::penguins %>%
   aes(x = bill_length_mm) +
   geom_rug(alpha = .3) +
   geom_histogram(alpha = .4) + #BREAK
-  ggxmean:::geom_xmean() + #BREAK
-  # unexpected behavior here
-  aes(fill = species) + #BREAK
+  geom_xmean() + #BREAK
   aes(color = species) + #BREAK
+  aes(fill = species) + #BREAK
   facet_grid(rows = vars(species)) + #BREAK
   facet_grid(rows = vars(species, sex)) + #BREAK
-  ggxmean:::geom_xq2575(linetype = "dotted") + #BREAK
-  ggxmean:::geom_xmin(linetype = "solid") + #BREAK
-  ggxmean:::geom_xmax(linetype = "solid",
-            color = "goldenrod") #BREAK
+  geom_rug(alpha = .6) + #BREAK
+  geom_xmin(linetype = "dashed") + #BREAK
+  geom_xmax(color = "goldenrod") + #BREAK
+  geom_xmedian(color = "black") + #BREAK
+  ggxmean:::geom_xq2575(
+    linetype = "dotted",
+    color = "black",
+    size = .75) + #BREAK
+  geom_boxplot(y = 0,
+               width = 3,
+               fill = "white",
+               color = "black") #BREAK
 ```
 
 
@@ -124,7 +131,24 @@ class: inverse
 
  ```{r, comment = '', echo = F, return = 'asis'}
 cat('---
-\n`r chunk_reveal("vizthemean2d", break_type = "user")`\n\n```{r vizthemean2d, include = F}\nlibrary(ggxmean)\npalmerpenguins::penguins %>% \n  drop_na() %>% \n  ggplot() +\n  aes(x = bill_length_mm) +\n  aes(y = flipper_length_mm) +\n  geom_point() + #BREAK\n  ggxmean:::geom_xmean() + #BREAK\n  aes(color = species) + #BREAK\n  facet_wrap(facets = vars(species)) + #BREAK\n  ggxmean:::geom_ymean() + #BREAK\n  facet_grid(cols = vars(species),\n             rows = vars(sex)) #BREAK\n```\n\n\n\n')
+class: inverse, center, middle\n\n\n# and the mean of y\n')
+```
+---
+class: inverse, center, middle
+
+
+# and the mean of y
+
+
+
+---
+class: inverse
+
+###From source .Rmd:
+
+ ```{r, comment = '', echo = F, return = 'asis'}
+cat('---
+\n`r chunk_reveal("vizthemean2d", break_type = "user")`\n\n```{r vizthemean2d, include = F}\nlibrary(ggxmean)\npalmerpenguins::penguins %>% \n  drop_na() %>% \n  ggplot() +\n  aes(x = bill_length_mm) +\n  aes(y = flipper_length_mm) +\n  geom_point() + #BREAK\n  geom_xmean() + #BREAK\n  geom_ymean() + #BREAK\n  aes(color = species) + #BREAK\n  facet_wrap(facets = vars(species)) + #BREAK\n  facet_grid(cols = vars(species),\n             rows = vars(sex)) #BREAK\n```\n')
 ```
 ---
 
@@ -138,16 +162,31 @@ palmerpenguins::penguins %>%
   aes(x = bill_length_mm) +
   aes(y = flipper_length_mm) +
   geom_point() + #BREAK
-  ggxmean:::geom_xmean() + #BREAK
+  geom_xmean() + #BREAK
+  geom_ymean() + #BREAK
   aes(color = species) + #BREAK
   facet_wrap(facets = vars(species)) + #BREAK
-  ggxmean:::geom_ymean() + #BREAK
   facet_grid(cols = vars(species),
              rows = vars(sex)) #BREAK
 ```
 
 
 
+---
+class: inverse
+
+###From source .Rmd:
+
+ ```{r, comment = '', echo = F, return = 'asis'}
+cat('---
+class: inverese, center, middle\n\n# OLS\n\n\n')
+```
+---
+class: inverese, center, middle
+
+# OLS
+
+
 
 
 
@@ -158,31 +197,121 @@ class: inverse
 
  ```{r, comment = '', echo = F, return = 'asis'}
 cat('---
-\n\n`r chunk_reveal("vizthecorrelation", title = "## viz the correlation" , break_type = "user")`\n\n```{r vizthecorrelation, include=F}\nlibrary(ggxmean)\npalmerpenguins::penguins %>% \n  drop_na() %>% \n  ggplot() +\n  aes(x = bill_length_mm) +\n  aes(y = flipper_length_mm) + \n  geom_point() + #BREAK\n  ggxmean:::geom_xmean() + #BREAK\n  ggxmean:::geom_ymean() + #BREAK\n  ggxmean:::geom_yhline(alpha = .02) + #BREAK\n  ggxmean:::geom_xvline(alpha = .02) + #BREAK\n  ggxmean:::geom_xdiff() + #BREAK\n  ggxmean:::geom_ydiff() + #BREAK\n  ggxmean:::geom_diffsmultiplied() + #BREAK\n  aes(x = ((bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm))) + #BREAK\n  aes(y = (flipper_length_mm - mean(flipper_length_mm))/sd(flipper_length_mm)) #BREAK\n```\n')
+\n`r chunk_reveal("ols", break_type = "user")`\n\n```{r ols, include = F}\nggxmean:::geoms_chalk()  # let the default color be chaulky\npalmerpenguins::penguins %>% \n  filter(species == "Chinstrap" & sex == "male") %>% \n  ggplot() +\n  ggxmean:::theme_chalkboard_slate() + \n  aes(x = flipper_length_mm) +\n  aes(y = body_mass_g) +\n  geom_point() + #BREAK\n  ggxmean:::geom_lm() + #BREAK\n  geom_rug(aes(y = NULL)) + #BREAK\n  geom_xvline(alpha = .1,  \n                        linetype = "dotted") + #BREAK\n  ggxmean:::geom_lmfitted(color = "blue", size = 2.5) + #BREAK\n  ggxmean:::geom_lmresiduals(color = "tomato3") + #BREAK\n  geom_ymean() + #BREAK\n  geom_xmean() + #BREAK\n  ggxmean:::geom_xymean(size = 3, color = "lightpink4") + #BREAK\n  ggxmean:::geom_lmformula() + #BREAK\n  # plug and chug to calculate an \n  # expected value of y for a given x \n  annotate(geom = "point",  \n           x = 208,  \n           y = 40.3 * 208 - 4110,  \n           size = 5, \n           shape = "diamond") + #BREAK\n  ggxmean:::geom_lmrun(color = "violetred4") + #BREAK\n  ggxmean:::geom_lmrise(color = "violetred4") + #BREAK\n  ggxmean:::geom_lmrun10(color = "chartreuse3") + #BREAK\n  ggxmean:::geom_lmrise10(color = "chartreuse3") + #BREAK\n  ggxmean:::geom_lmpredictx(alpha = .2) + #BREAK\n  ggxmean:::geom_lmpredicty(alpha = .2) + #BREAK\n  ggxmean:::geom_lmintercept() + #BREAK\n  ggxmean:::geom_lminterceptcoords(hjust = 0) #BREAK\n```\n\n')
 ```
 ---
 
+`r chunk_reveal("ols", break_type = "user")`
 
-`r chunk_reveal("vizthecorrelation", title = "## viz the correlation" , break_type = "user")`
+```{r ols, include = F}
+ggxmean:::geoms_chalk()  # let the default color be chaulky
+palmerpenguins::penguins %>% 
+  filter(species == "Chinstrap" & sex == "male") %>% 
+  ggplot() +
+  ggxmean:::theme_chalkboard_slate() + 
+  aes(x = flipper_length_mm) +
+  aes(y = body_mass_g) +
+  geom_point() + #BREAK
+  ggxmean:::geom_lm() + #BREAK
+  geom_rug(aes(y = NULL)) + #BREAK
+  geom_xvline(alpha = .1,  
+                        linetype = "dotted") + #BREAK
+  ggxmean:::geom_lmfitted(color = "blue", size = 2.5) + #BREAK
+  ggxmean:::geom_lmresiduals(color = "tomato3") + #BREAK
+  geom_ymean() + #BREAK
+  geom_xmean() + #BREAK
+  ggxmean:::geom_xymean(size = 3, color = "lightpink4") + #BREAK
+  ggxmean:::geom_lmformula() + #BREAK
+  # plug and chug to calculate an 
+  # expected value of y for a given x 
+  annotate(geom = "point",  
+           x = 208,  
+           y = 40.3 * 208 - 4110,  
+           size = 5, 
+           shape = "diamond") + #BREAK
+  ggxmean:::geom_lmrun(color = "violetred4") + #BREAK
+  ggxmean:::geom_lmrise(color = "violetred4") + #BREAK
+  ggxmean:::geom_lmrun10(color = "chartreuse3") + #BREAK
+  ggxmean:::geom_lmrise10(color = "chartreuse3") + #BREAK
+  ggxmean:::geom_lmpredictx(alpha = .2) + #BREAK
+  ggxmean:::geom_lmpredicty(alpha = .2) + #BREAK
+  ggxmean:::geom_lmintercept() + #BREAK
+  ggxmean:::geom_lminterceptcoords(hjust = 0) #BREAK
+```
+
+
+
+
+---
+class: inverse
+
+###From source .Rmd:
+
+ ```{r, comment = '', echo = F, return = 'asis'}
+cat('---
+class: inverse\n\n# Correlation\n\n--\n\n# Don\'t worry about the overall importance of the problem; \n--\nwork on it if it looks interesting.  \n--\nI think there\'s a sufficient correlation between interest and importance.  \n--\n- David Blackwell\n\n\n\n')
+```
+---
+class: inverse
+
+# Correlation
+
+--
+
+# Don't worry about the overall importance of the problem; 
+--
+work on it if it looks interesting.  
+--
+I think there's a sufficient correlation between interest and importance.  
+--
+- David Blackwell
+
+
+
+
+
+
+---
+class: inverse
+
+###From source .Rmd:
+
+ ```{r, comment = '', echo = F, return = 'asis'}
+cat('---
+\n`r chunk_reveal("vizthecorrelation", break_type = "user")`\n\n```{r vizthecorrelation, include=F}\nggxmean:::geoms_chalk()  # let the default aesthetics be chalky\nlibrary(ggxmean)\npalmerpenguins::penguins %>% \n  mutate(id = row_number()) %>% \n  ggplot() + \n  aes(x = bill_length_mm) +\n  aes(y = flipper_length_mm) + \n  geom_point() + \n  ggxmean:::theme_chalkboard() + #BREAK\n  geom_xmean() + #BREAK\n  geom_ymean() + #BREAK\n  ggxmean:::geom_yhline(alpha = .02) + #BREAK\n  ggxmean:::geom_xvline(alpha = .02) + #BREAK\n  ggxmean:::geom_xdiff() + #BREAK\n  ggxmean:::geom_ydiff() + #BREAK\n  ggxmean:::geom_diffsmultiplied() + #BREAK\n  ggxmean:::geom_x1sd() + #BREAK\n  ggxmean:::geom_y1sd() + #BREAK\n  ggxmean:::geom_rsq1(fill = "blue") + #BREAK\n  ggxmean:::geom_xy1sd(fill = "green") + #BREAK\n  ggxmean:::geom_xydiffsmean(alpha = 1,\n                   fill = "plum3") + \n  ggxmean:::geom_corrlabel() + #BREAK\n  ggxmean:::geom_lm() + #BREAK\n  facet_wrap(facet = vars(species)) #BREAK\n```\n\n')
+```
+---
+
+`r chunk_reveal("vizthecorrelation", break_type = "user")`
 
 ```{r vizthecorrelation, include=F}
+ggxmean:::geoms_chalk()  # let the default aesthetics be chalky
 library(ggxmean)
 palmerpenguins::penguins %>% 
-  drop_na() %>% 
-  ggplot() +
+  mutate(id = row_number()) %>% 
+  ggplot() + 
   aes(x = bill_length_mm) +
   aes(y = flipper_length_mm) + 
-  geom_point() + #BREAK
-  ggxmean:::geom_xmean() + #BREAK
-  ggxmean:::geom_ymean() + #BREAK
+  geom_point() + 
+  ggxmean:::theme_chalkboard() + #BREAK
+  geom_xmean() + #BREAK
+  geom_ymean() + #BREAK
   ggxmean:::geom_yhline(alpha = .02) + #BREAK
   ggxmean:::geom_xvline(alpha = .02) + #BREAK
   ggxmean:::geom_xdiff() + #BREAK
   ggxmean:::geom_ydiff() + #BREAK
   ggxmean:::geom_diffsmultiplied() + #BREAK
-  aes(x = ((bill_length_mm - mean(bill_length_mm)) / sd(bill_length_mm))) + #BREAK
-  aes(y = (flipper_length_mm - mean(flipper_length_mm))/sd(flipper_length_mm)) #BREAK
+  ggxmean:::geom_x1sd() + #BREAK
+  ggxmean:::geom_y1sd() + #BREAK
+  ggxmean:::geom_rsq1(fill = "blue") + #BREAK
+  ggxmean:::geom_xy1sd(fill = "green") + #BREAK
+  ggxmean:::geom_xydiffsmean(alpha = 1,
+                   fill = "plum3") + 
+  ggxmean:::geom_corrlabel() + #BREAK
+  ggxmean:::geom_lm() + #BREAK
+  facet_wrap(facet = vars(species)) #BREAK
 ```
+
 
 
 
@@ -193,20 +322,44 @@ class: inverse
 
  ```{r, comment = '', echo = F, return = 'asis'}
 cat('---
-\n`r chunk_reveal("suprising", title = "### something surprising")`\n\n```{r suprising, include = F}\ncars %>% \n  ggplot() +\n  aes(x = speed) +\n  # we dont see it\n  ggxmean:::geom_xmean(color = "firebrick",\n             size = 2,\n             linetype = "dotted") +\n  # only x aes is required for xmean \n  # by y is set to neg Inf and pos Inf\n  # means y needs activated\n  aes(y = dist) +\n  geom_blank() +\n  geom_point() + \n  geom_rug()\n```\n')
+class: inverse, center\n\n# A behavior that is a little weird:  the vline at x requires y to exist\n\n--\n\n## This is because the verticle line inherits from segment, and y is Inf and yend is -Inf.  W/o some kind of y scale, we don\'t see anything. \n\n--\n\n## This is true of other vline and hline geoms too geom_xmin, geom_ymin, geom_xvline, etc\n')
+```
+---
+class: inverse, center
+
+# A behavior that is a little weird:  the vline at x requires y to exist
+
+--
+
+## This is because the verticle line inherits from segment, and y is Inf and yend is -Inf.  W/o some kind of y scale, we don't see anything. 
+
+--
+
+## This is true of other vline and hline geoms too geom_xmin, geom_ymin, geom_xvline, etc
+
+
+
+---
+class: inverse
+
+###From source .Rmd:
+
+ ```{r, comment = '', echo = F, return = 'asis'}
+cat('---
+\n`r chunk_reveal("suprising")`\n\n```{r suprising, include = F}\nggxmean:::geoms_chalk()\ncars %>% \n  ggplot() +\n  ggxmean:::theme_chalkboard_slate() + \n  aes(x = speed) +\n  # we dont see it\n  geom_xmean() +\n  # only x aes is required for xmean \n  # by y is set to neg Inf and pos Inf\n  # means y needs activated\n  aes(y = dist) +\n  geom_blank() +\n  geom_point() + \n  geom_rug()\n```\n')
 ```
 ---
 
-`r chunk_reveal("suprising", title = "### something surprising")`
+`r chunk_reveal("suprising")`
 
 ```{r suprising, include = F}
+ggxmean:::geoms_chalk()
 cars %>% 
   ggplot() +
+  ggxmean:::theme_chalkboard_slate() + 
   aes(x = speed) +
   # we dont see it
-  ggxmean:::geom_xmean(color = "firebrick",
-             size = 2,
-             linetype = "dotted") +
+  geom_xmean() +
   # only x aes is required for xmean 
   # by y is set to neg Inf and pos Inf
   # means y needs activated
@@ -215,45 +368,4 @@ cars %>%
   geom_point() + 
   geom_rug()
 ```
-
-
-
----
-class: inverse
-
-###From source .Rmd:
-
- ```{r, comment = '', echo = F, return = 'asis'}
-cat('---
-\n`r chunk_reveal("ols")`\n\n```{r ols, include = F}\npalmerpenguins::penguins %>% \n  filter(species == "Chinstrap") %>% \n  filter(sex == "male") %>% \n  ggplot() +\n  aes(x = flipper_length_mm) +\n  aes(y = body_mass_g) +\n  geom_point() +\n  ggxmean:::geom_lm() +\n  geom_rug(aes(y = NULL)) + \n  ggxmean:::geom_xvline(alpha = .1, \n                        linetype = "dotted") +\n  ggxmean:::geom_lmfitted(color = "blue",    \n                          size = 2) +\n  ggxmean:::geom_lmresiduals(linetype = "dashed", \n                             color = "firebrick") +\n  ggxmean:::geom_ymean() +\n  ggxmean:::geom_xmean() +\n  geom_xymean(size = 3, color = "magenta") +\n  ggxmean:::geom_lmformula() +\n  ggxmean:::geom_lmrun(color = "magenta") +\n  ggxmean:::geom_lmrise(color = "magenta") +\n  ggxmean:::geom_lmintercept()\n```\n\n')
-```
----
-
-`r chunk_reveal("ols")`
-
-```{r ols, include = F}
-palmerpenguins::penguins %>% 
-  filter(species == "Chinstrap") %>% 
-  filter(sex == "male") %>% 
-  ggplot() +
-  aes(x = flipper_length_mm) +
-  aes(y = body_mass_g) +
-  geom_point() +
-  ggxmean:::geom_lm() +
-  geom_rug(aes(y = NULL)) + 
-  ggxmean:::geom_xvline(alpha = .1, 
-                        linetype = "dotted") +
-  ggxmean:::geom_lmfitted(color = "blue",    
-                          size = 2) +
-  ggxmean:::geom_lmresiduals(linetype = "dashed", 
-                             color = "firebrick") +
-  ggxmean:::geom_ymean() +
-  ggxmean:::geom_xmean() +
-  ggxmean:::geom_xymean(size = 3, color = "magenta") +
-  ggxmean:::geom_lmformula() +
-  ggxmean:::geom_lmrun(color = "magenta") +
-  ggxmean:::geom_lmrise(color = "magenta") +
-  ggxmean:::geom_lmintercept()
-```
-
 
