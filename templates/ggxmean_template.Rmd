@@ -49,6 +49,7 @@ class: inverse, center, middle
 `r chunk_reveal("vizthemean1d", break_type = "user")`
 
 ```{r vizthemean1d, include = F}
+library(tidyverse)
 library(ggxmean)
 palmerpenguins::penguins %>% 
   drop_na() %>% 
@@ -89,7 +90,6 @@ class: inverse, center, middle
 `r chunk_reveal("vizthemean2d", break_type = "user")`
 
 ```{r vizthemean2d, include = F}
-library(ggxmean)
 palmerpenguins::penguins %>% 
   drop_na() %>% 
   ggplot() +
