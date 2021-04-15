@@ -4,7 +4,7 @@ author: Me, an Rmarkdown writer and flipbook builder
 output: html_document
 ---
 
-This template aimed at doing the following:  preparing a flipbook from within an .Rmd source file and then *embedded* it in the resulting html.  Narrative might be interspersed between the code-movies.  
+This template aimed at doing the following:  preparing a flipbook from within an .Rmd source file and then *embedded* it in the resulting html.  Narrative might be interspersed between the code-movies.    
 
 ## Steps:
 

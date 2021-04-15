@@ -1,8 +1,14 @@
 ---
-title: "Get the templates and render them"
+title: "Get the templates, render them, double crochet them"
 author: "E. Reynolds"
-
 ---
+
+
+
+Have you built a package sent a template off with it?  I love to do this!  It is really easy to set up with usethis as you build a package, and I think it is a great way to ship examples and show code behavior.  
+
+`usethis::use_rmarkdown_template()`
+
 
 These templates reside online in package github repositories.  All are xaringan .Rmd files that have flipbookr in use. 
 
