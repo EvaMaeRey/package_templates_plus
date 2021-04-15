@@ -1,16 +1,21 @@
 ---
-title: "Get the templates, render them, double crochet them"
+title: "Get templates, render 'em, crochet 'em"
 author: "E. Reynolds"
 ---
 
-
-
-Have you built a package sent a template off with it?  I love to do this!  It is really easy to set up with usethis as you build a package, and I think it is a great way to ship examples and show code behavior.  
+Have you built a package sent a template off with it?  I love to do this!  It is really easy to set up with {usethis} as you build a package, and I think it is a great way to ship examples and show code behavior.  
 
 `usethis::use_rmarkdown_template()`
 
+But getting to the point of using a template asks a lot of users: Install my package, load it, find the template, render it -- all before getting a look at what it is going to deliver.  
+
+So this repository is about serving up the rendered templates.  
+
 
 These templates reside online in package github repositories.  All are xaringan .Rmd files that have flipbookr in use. 
+
+- [embed](templates/embedded_flipbooks/fine_tuning_embed.html)
+- [ggxmean template](templates/ggxmean_template.html)
 
 
 ```{r, results='hide'}
@@ -54,9 +59,6 @@ for (i in 1:length(list_of_urls)){
 embed_flipbook <- "https://raw.githubusercontent.com/EvaMaeRey/flipbookr/master/inst/rmarkdown/templates/flipbook-embed/skeleton/skeleton.Rmd"
 
 download.file(embed_flipbook, "templates/embed_flipbook.Rmd")
-
-
-
 
 ```
 
